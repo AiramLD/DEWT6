@@ -7,53 +7,42 @@
 </head>
 <body>
   <h1>Ejercicio 2</h1>
-  <form action="" method="get>">
-    <p>
-      Color: <input type="color" name="color" id="color" onchange="changeText()"><br>
-    </p>
-    <p>
-      Tamaño: <input type="range" name="size" id="size" min="8" max="30" onchange="changeText()"><br>
-    </p>
-    <p>
-      Guardar: <input type="submit" value="Guardar" onclick="saveData()"><br>
-    </p>
-    <p id="paragraph">
-      Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido <br>
-      el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) 
-    </p>
-  </form>
+  <p>
+    Color: 
+    <input type="color" name="color" id="color" onchange="changeText()">
+  </p>
+  <p>
+    Tamaño:
+    <input type="range" name="size" id="size" min="8" max="30" onchange="changeText()">
+  </p>
+  <p>
+    <input type="submit" value="guardar" onclick="saveFormat()">
+  </p>
+  <p id="paragraph">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae corrupti, quaerat delectus, beatae consequatur error excepturi repellendus omnis eius nostrum nobis dicta voluptas quos, a officiis cumque iusto qui! Vel?</p>
   <script>
     const inputColor = document.getElementById('color');
     const inputSize = document.getElementById('size');
     const paragraph = document.getElementById('paragraph');
-  
-    function changeText(){
+
+    function changeText() {
       paragraph.style.color = inputColor.value;
-      paragraph.style.fontSize = `${inputSize.value}px`;
-      saveData();
+      paragraph.style.fontSize = inputSize.value + 'px';
+      //saveFormat();
     }
 
-    function saveData(){
+    function saveFormat() {
       localStorage.color = inputColor.value;
-      localStorage.range = inputSize.value;
-    
+      localStorage.size = inputSize.value;
     }
-    window.onload = ()=> {
+
+    window.onload = () => {
       console.log('en onload');
-      if(localStorage.color && localStorage.size){
+      if (localStorage.color && localStorage.size) {
         inputColor.value = localStorage.color;
         inputSize.value = localStorage.size;
       }
       changeText();
     };
-    
-    
-
-    //   function saveData(){
-    //   localStorage.setItem("color",document.getElementsByName('color')[0].value);
-    //   localStorage.setItem("range",document.getElementsByName('range')[0].value);
-    // }
   </script>
-  
 </body>
 </html>
