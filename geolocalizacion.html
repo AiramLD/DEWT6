@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Geolocalización</title>
+  </head>
+  <body>
+    <h1>Prueba de Geolocalización</h1>
+    <p>Latitud: <span id="lat">--</span></p>
+    <p>Longitud: <span id="lon">--</span></p>
+    <p><button onclick="getCurrentPosition()">Obtener ubicación</button></p>
+    <iframe
+      width="800"
+      height="600"
+      id="map"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=
+      8.827514648437502,
+      59.334590277457245,
+      12.0245361328125,
+      60.15654283139454
+      &layer=mapnik"
+      style="border: 1px solid black"></iframe><br/>
+
+    <script>
+      function getCurrentPosition() {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          let lon = position.coords.longitude;
+          let lat = position.coords.latitude;
+          document.getElementById("lat").textContent = lat;
+          document.getElementById("lon").textContent = lon;
+          let zoom = 0.01;
+          let lonIni = lon - zoom;
+          let lonFin = lon + zoom;
+          let latIni = lat - zoom;
+          let latFin = lat + zoom;
+          let url = `https://www.openstreetmap.org/export/embed.html?bbox=${lonIni},${latIni},${lonFin},${latFin}&layer=mapnik`;
+          document.querySelector("iframe").src = url;	
+        });
+      }
+    </script>
+  </body>
+</html>
